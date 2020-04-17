@@ -32,7 +32,6 @@ export class AppComponent {
    }   
 
    strCompare(chosen: string, currIter: string) {
-     console.log(chosen === currIter);
      return chosen === currIter;
    }
    

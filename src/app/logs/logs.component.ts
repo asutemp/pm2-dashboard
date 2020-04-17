@@ -10,7 +10,7 @@ import { LogReaderService } from './log-reader.service';
 export class LogsComponent implements OnInit {
   @Input() logPath: string;
   logIntermediary: Observable<string>;
-  logOutput: string;
+  logOutput: string[];
   providers: [LogReaderService];
 
   constructor(private logreaderservice: LogReaderService) { }
@@ -22,7 +22,7 @@ export class LogsComponent implements OnInit {
   async getLog(path: string){
     this.logIntermediary = await this.logreaderservice.getObsLog(path);
     this.logIntermediary
-      .subscribe(data => this.logOutput = data);
+      .subscribe(data => this.logOutput = data.split('\n'));
     console.log(this.logOutput);
   }
 
