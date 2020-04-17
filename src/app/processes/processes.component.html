@@ -1,0 +1,12 @@
+<div class="row" *ngIf="processNames">
+    <div class="col-xs-12">
+        <a
+            href=#
+            (click)="onSelected(process)"
+            class="list-group-item-clearfix"
+            *ngFor="let process of processNames"
+        >
+            <p class="list-group-item-text">{{ process }}</p>
+        </a>
+    </div>
+</div>
