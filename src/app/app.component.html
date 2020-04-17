@@ -57,27 +57,8 @@
               <div class="sectionLabel">
                 <h1 style="padding-left:10px">Metrics</h1>
               </div>
-              <span>{{jlist.pm2_env.axm_monitor['Heap Size'].value}}</span>
               <app-metrics
-              [heapSizeValue]="jlist.name"
-              [heapSizeUnit]="jlist.pm2_env.axm_monitor['Heap Size'].unit"
-              [heapUsageValue]="jlist.pm2_env.axm_monitor['Heap Usage'].value"
-              [heapUsageUnit]="jlist.pm2_env.axm_monitor['Heap Usage'].unit"
-              [usedHeapSizeValue]="jlist.pm2_env.axm_monitor['Used Heap Size'].value"
-              [usedHeapSizeUnit]="jlist.pm2_env.axm_monitor['Used Heap Size'].unit"
-              [activeRequestsValue]="jlist.pm2_env.axm_monitor['Active requests'].value"
-              [activeHandelsValue]="jlist.pm2_env.axm_monitor['Active handels'].value"
-              [eventLoopLatencyValue]="jlist.pm2_env.axm_monitor['Event Loop Latency'].value"
-              [eventLoopLatencyUnit]="jlist.pm2_env.axm_monitor['Event Loop Latency'].unit"
-              [eventLoopLatencyP95Value]="jlist.pm2_env.axm_monitor['Event Loop Latency p95'].value"
-              [eventLoopLatencyP95Unit]="jlist.pm2_env.axm_monitor['Event Loop Latency p95'].unit"
-              [httpMeanLatencyValue]="jlist.pm2_env.axm_monitor['HTTP Mean Latency'].value"
-              [httpMeanLatencyUnit]="jlist.pm2_env.axm_monitor['HTTP Mean Latency'].unit"
-              [httpP95LatencyValue]="jlist.pm2_env.axm_monitor['HTTP p95 Latency'].value"
-              [httpP95LatencyUnit]="jlist.pm2_env.axm_monitor['HTTP p95 Latency'].unit"
-              [httpValue]="jlist.pm2_env.axm_monitor.Http.value"
-              [httpUnit]="jlist.pm2_env.axm_monitor.Http.unit"
-              ></app-metrics>
+              [jlist]="jlist"></app-metrics>
               
             </div>
           
