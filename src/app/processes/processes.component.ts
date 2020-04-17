@@ -17,6 +17,5 @@ export class ProcessesComponent implements OnInit {
    
    onSelected(process: string) {
     this.selectedProcess.emit(process);
-    console.log(process);
    }
 } 

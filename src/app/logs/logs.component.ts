@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Processes } from '../processes/processNames';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http'; 
+import { LogReaderService } from './log-reader.service';
 
 @Component({
   selector: 'app-logs',
@@ -10,20 +9,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LogsComponent implements OnInit {
   @Input() logPath: string;
-  logOutput: Observable<string[]>
+  logIntermediary: Observable<string>;
+  logOutput: string;
+  providers: [LogReaderService];
 
-  constructor(private http: HttpClient) { }
+  constructor(private logreaderservice: LogReaderService) { }
 
   ngOnInit() {
 	  this.getLog(this.logPath);
    }
 
-  getLog(path: string){
-    this.logOutput = this.getObsLog(path);
-  }
-
-  getObsLog(logPath: string): Observable<string[]> {
-    return this.http.get<string[]>(logPath);
+  async getLog(path: string){
+    this.logIntermediary = await this.logreaderservice.getObsLog(path);
+    this.logIntermediary
+      .subscribe(data => this.logOutput = data);
+    console.log(this.logOutput);
   }
 
 }

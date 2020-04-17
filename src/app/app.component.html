@@ -31,7 +31,7 @@
               <h1 style="padding-left:10px">
                 <div class="row">
                   <p>{{ chosenProcess }} Logs {{ logType }}</p>
-                  <select name="selectedLogDrop" id="selectedLogDropID" style="position:absolute; right:30px; top:20px">
+                  <select name="logType" id="logType" style="position:absolute; right:30px; top:20px">
                     <option selected="selected" value="one">Combined</option>
                     <option value="two">Error</option>
                     <option value="three">Out</option>
@@ -43,11 +43,12 @@
                 </div>
               </h1>
             </div>
-            <div *ngSwitch="logType">
-              <app-logs *ngSwitchCase="'Error'" [logPath]="jlist.pm_err_log_path"></app-logs>
-              <app-logs *ngSwitchCase="'Combined'" [logPath]="jlist.pm_log_path"></app-logs>
-              <app-logs *ngSwitchDefault [logPath]="jlist.pm_out_log_path"></app-logs>
-            </div>
+            <app-logs [logPath]="'/assets/contentful-poc-combined-0.log'"></app-logs>
+            <!--div *ngSwitch="logType">
+              <app-logs *ngSwitchCase="'Error'" [logPath]="jlist.pm2_env.pm_err_log_path"></app-logs>
+              <app-logs *ngSwitchCase="'Combined'" [logPath]="jlist.pm2_env.pm_log_path"></app-logs>
+              <app-logs *ngSwitchDefault [logPath]="jlist.pm2_env.pm_out_log_path"></app-logs>
+            </div-->
           </div>
           
           <!--METRICS-->

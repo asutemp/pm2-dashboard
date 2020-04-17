@@ -29,8 +29,6 @@ export class AppComponent {
       .subscribe(data => data.forEach(element => {
         this.processList.push(element.name);
       }))
-      console.log(this.obsJlist);
-      console.log(this.processList);
    }   
 
    strCompare(chosen: string, currIter: string) {
