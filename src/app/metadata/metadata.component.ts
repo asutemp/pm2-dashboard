@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Processes } from '../processes/processNames';
+import { Observable } from 'rxjs';
+import { StrCompService } from '../str-comp.service';
 
 @Component({
   selector: 'app-metadata',
@@ -7,22 +10,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MetadataComponent implements OnInit {
 
-  @Input() name: string;
-  @Input() namespace: string;
-  @Input() version: string;
-  @Input() unstable_restarts: string;
-  @Input() pm_uptime: string;
-  @Input() pm_exec_path: string;
-  @Input() args: string;
-  @Input() exec_interpreter: string;
-  @Input() node_args: string;
-  @Input() exec_mode: string;
-  @Input() node_version: string;
-  @Input() watch: string;
+  @Input() obsJlist: Observable<Processes[]>;
+  @Input() chosenProcess: string;
+  jlist: Processes;
+  getDateTime = new Date();
   
-  constructor() { }
+  constructor(public strcomp: StrCompService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
+
+  
 
 }

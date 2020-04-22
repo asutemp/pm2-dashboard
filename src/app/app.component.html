@@ -16,39 +16,37 @@
       </div>
 
       <app-processes
-        [processNames]="processList"
+        [obsJlist]="obsJlist"
         (selectedProcess)="chosenProcess = $event"
       ></app-processes>
     </div>
     <div *ngIf="chosenProcess">
       <div *ngFor="let jlist of obsJlist | async">
-        <div *ngIf="strCompare(chosenProcess, jlist.name)">
-          
+        <div *ngIf="strcomp.strCompare(chosenProcess, jlist.name)">
+        
           <!--LOGS-->
           
           <div class="column right">
             <div class="sectionLabel">
               <h1 style="padding-left:10px">
                 <div class="row">
-                  <p>{{ chosenProcess }} Logs {{ logType }}</p>
-                  <select name="logType" id="logType" style="position:absolute; right:30px; top:20px">
-                    <option selected="selected" value="one">Combined</option>
-                    <option value="two">Error</option>
-                    <option value="three">Out</option>
-                  </select>
-                  <script>
-                    var e = document.getElementById("selectedLogDropID");
-                    var logType = e.options[e.selectedIndex].value
-                  </script>
+                  <p>{{ chosenProcess }} Logs</p>
+                  <div style="position:absolute; right:30px; top:18px">
+                    <p style="color: whitesmoke; font-size: 15px">
+                      <select [(ngModel)]="logType" (change)="app-logs.ngOnInIt()">
+                        <option selected="selected" value="jlist.pm2_env.pm_log_path" *ngIf="jlist.pm2_env.pm_log_path">Combined</option>
+                        <option value="jlist.pm2_env.pm_err_log_path" *ngIf="jlist.pm2_env.pm_err_log_path">Error</option>
+                        <option value="jlist.pm2_env.pm_out_log_path" *ngIf="jlist.pm2_env.pm_out_log_path">Out</option>
+                      </select>
+                    </p>
+                  </div>
                 </div>
               </h1>
             </div>
-            <app-logs [logPath]="'/assets/contentful-poc-combined-0.log'"></app-logs>
-            <!--div *ngSwitch="logType">
-              <app-logs *ngSwitchCase="'Error'" [logPath]="jlist.pm2_env.pm_err_log_path"></app-logs>
-              <app-logs *ngSwitchCase="'Combined'" [logPath]="jlist.pm2_env.pm_log_path"></app-logs>
-              <app-logs *ngSwitchDefault [logPath]="jlist.pm2_env.pm_out_log_path"></app-logs>
-            </div-->
+            <app-logs 
+              [logPath]="logType"
+              [chosenProcess]="chosenProcess"
+            ></app-logs>
           </div>
           
           <!--METRICS-->
@@ -59,7 +57,9 @@
                 <h1 style="padding-left:10px">Metrics</h1>
               </div>
               <app-metrics
-              [jlist]="jlist"></app-metrics>
+                [chosenProcess]="chosenProcess"
+                [obsJlist]="obsJlist"
+              ></app-metrics>
               
             </div>
           
@@ -72,18 +72,8 @@
               </div>
 
               <app-metadata
-                [name]="chosenProcess"
-                [namespace]="jlist.pm2_env.namespace"
-                [version]="jlist.pm2_env.version"
-                [unstable_restarts]="jlist.pm2_env.unstable_restarts"
-                [pm_uptime]="jlist.pm2_env.pm_uptime"
-                [pm_exec_path]="jlist.pm2_env.pm_exec_path"
-                [args]="jlist.pm2_env.args"
-                [exec_interpreter]="jlist.pm2_env.exec_interpreter"
-                [node_args]="jlist.pm2_env.node_args"
-                [exec_mode]="jlist.pm2_env.exec_mode"
-                [node_version]="jlist.pm2_env.node_version"
-                [watch]="jlist.pm2_env.watch"
+                [chosenProcess]="chosenProcess"
+                [obsJlist]="obsJlist"
               ></app-metadata>
             </div>
 

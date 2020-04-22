@@ -1,50 +1,9 @@
-<table style="width:100%">
-    <tr>
-        <td>Heap Size</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Heap Size'].value }}</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Heap Size'].unit }}</td>
-    </tr>
-    <tr>
-        <td>Heap Usage</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Heap Usage'].value }}</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Heap Usage'].unit }}</td>
-    </tr>
-    <tr>
-        <td>Used Heap Size</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Used Heap Size'].value }}</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Used Heap Size'].unit }}</td>
-    </tr>
-    <tr>
-        <td>Active Requests</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Active requests'].value }}</td>
-    </tr>
-    <tr>
-        <td>Active Handles</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Active handles'].value }}</td>
-    </tr>
-    <tr>
-        <td>Event Loop Latency</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Event Loop Latency'].value }}</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Event Loop Latency'].unit }}</td>
-    </tr>
-    <tr>
-        <td>Event Loop Latency p95</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Event Loop Latency p95'].value }}</td>
-        <td>{{ jlist.pm2_env.axm_monitor['Event Loop Latency p95'].unit }}</td>
-    </tr>
-    <tr>
-        <td>HTTP Mean Latency</td>
-        <td>{{ jlist.pm2_env.axm_monitor['HTTP Mean Latency'].value }}</td>
-        <td>{{ jlist.pm2_env.axm_monitor['HTTP Mean Latency'].unit }}</td>
-    </tr>
-    <tr>
-        <td>HTTP p95 Latency</td>
-        <td>{{ jlist.pm2_env.axm_monitor['HTTP P95 Latency'].value }}</td>
-        <td>{{ jlist.pm2_env.axm_monitor['HTTP P95 Latency'].unit }}</td>
-    </tr>
-    <tr>
-        <td>HTTP</td>
-        <td>{{ jlist.pm2_env.axm_monitor.HTTP.value }}</td>
-        <td>{{ jlist.pm2_env.axm_monitor.HTTP.unit }}</td>
-    </tr>
-</table>
+<div *ngFor="let jlist of obsJlist | async">
+    <table style="width: 100%;" *ngIf="strcomp.strCompare(chosenProcess, jlist.name)">
+        <tr *ngFor="let axm of jlist.pm2_env.axm_monitor | keyvalue: keepOrder" style="border: 1px solid black; border-collapse: collapse;">
+            <td>{{ axm.key }}</td>
+            <td>{{ axm.value.value }}</td>
+            <td *ngIf="axm.value.unit">{{ axm.value.unit }}</td>
+        </tr>
+    </table>
+</div>

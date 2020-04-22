@@ -1,12 +1,25 @@
-<div class="row" *ngIf="processNames">
+<!--div class="row" *ngIf="obsJlist">
     <div class="col-xs-12">
         <a
             href=#
-            (click)="onSelected(process)"
+            (click)="onSelected(jlist.name)"
             class="list-group-item-clearfix"
-            *ngFor="let process of processNames"
+            *ngFor="let jlist of obsJlist | async">
         >
-            <p class="list-group-item-text">{{ process }}</p>
+            <p class="list-group-item-text">{{ jlist.name }}</p>
         </a>
     </div>
+</div-->
+
+<div *ngFor="let jlist of obsJlist | async">
+    <table style="width: 100%;">
+        <tr>
+            <td><a href=# (click)="onSelected(jlist.name)">{{ jlist.name }}</a></td>
+            <td>Mem:</td>
+            <td >{{ jlist.monit.memory/1024/1024 | number:'1.0-0' }} MB</td>
+            <td>CPU:</td>
+            <td>{{ jlist.monit.cpu }} %</td>
+            <td>{{ jlist.pm2_env.status }}</td>
+        </tr>
+    </table>
 </div>

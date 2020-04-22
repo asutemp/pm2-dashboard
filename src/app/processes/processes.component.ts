@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Processes } from './processNames';
 
 @Component({
   selector: 'app-processes',
@@ -6,8 +8,10 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
   styleUrls: ['./processes.component.css']
 })
 export class ProcessesComponent implements OnInit {
-   @Output() selectedProcess = new EventEmitter<string>();
-   @Input() processNames: string[] = new Array;
+  @Output() selectedProcess = new EventEmitter<string>();
+  @Input() obsJlist: Observable<Processes[]>;
+  jlist: Processes;
+  
    
    constructor() { }
    

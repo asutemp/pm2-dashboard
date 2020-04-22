@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs';
 import { Processes } from '../processes/processNames';
+import { ProcessesComponent } from '../processes/processes.component';
 
 @Injectable({
   providedIn: 'root'

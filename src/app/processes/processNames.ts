@@ -140,6 +140,7 @@ export interface Processes {
         vizion_running: boolean;
         km_link: boolean;
         pm_pid_path: string;
+        pm_log_path: string;
         pm_err_log_path: string;
         pm_out_log_path: string;
         exec_mode: string;

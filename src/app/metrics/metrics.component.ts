@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Processes } from '../processes/processNames';
+import { Observable } from 'rxjs';
+import { StrCompService } from '../str-comp.service';
 
 @Component({
   selector: 'app-metrics',
@@ -8,11 +10,20 @@ import { Processes } from '../processes/processNames';
 })
 export class MetricsComponent implements OnInit {
 
-  @Input() jlist: Processes;
+  @Input() obsJlist: Observable<Processes[]>;
+  @Input() chosenProcess: string;
+  jlist: Processes;
   
-  constructor() { }
+  constructor(public strcomp: StrCompService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() { }
+
+  keepOrder = (a, b) => {
+    return a;
+  }
+
+  checkIsString(str: string){
+    return typeof(str) === 'string';
   }
 
 }

@@ -14,6 +14,7 @@ export class LogReaderService {
   }
   
   async getObsLog(logPath: string): Promise<Observable<string>> {
+    console.log(logPath);
     const value = this.http.get(logPath, {responseType: 'text'});
     return value;
   }
