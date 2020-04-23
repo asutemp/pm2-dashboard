@@ -46,4 +46,12 @@ export class LogsComponent implements OnInit {
     console.log(incoming);
   }
 
+  printable(line: string){
+    if ((line.substring(21,48) === "seo process generation ....") || (line.substring(21,53) === "Node Express server listening on")){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
 }

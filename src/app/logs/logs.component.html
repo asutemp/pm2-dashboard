@@ -16,7 +16,9 @@
         <div style="max-height: 300px; overflow-y: scroll; height: 300px;">
             <div *ngIf="logType; else noLog">
                 <div *ngFor="let line of logOutput">
-                    {{ line }}
+                    <div *ngIf="printable(line)">
+                        {{ line }}
+                    </div>
                 </div>
             </div>
             <ng-template #noLog>

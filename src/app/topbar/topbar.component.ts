@@ -7,7 +7,7 @@ import { BashCommandsService } from '../php/bash-commands.service';
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent implements OnInit {
-  @Output() refreshRate: number = 5;
+  @Output() refreshRate: number = 9999;
 
   constructor(public bashcmd: BashCommandsService) { }
 
