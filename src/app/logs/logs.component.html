@@ -1,3 +1,29 @@
-<div *ngFor="let line of logOutput">
-    {{ line }}
+<div id="border" *ngFor="let jlist of obsJlist | async">
+    <div *ngIf="strcomp.strCompare(jlist.name, chosenProcess)">
+        <div class="sectionLabel" >
+            <h1 style="padding-left:10px">
+                <div class="row">
+                    <span>{{ chosenProcess }} Logs
+                        <select [(ngModel)]="logType" (change)="getLog(getLogPath(logType.toString()))" style="position:absolute; right:50px; top:30px">
+                            <option selected="selected" value="{{ jlist.pm2_env.pm_log_path }}" *ngIf="jlist.pm2_env.pm_log_path">Combined</option>
+                            <option value="{{ jlist.pm2_env.pm_err_log_path }}" *ngIf="jlist.pm2_env.pm_err_log_path">Error</option>
+                            <option value="{{ jlist.pm2_env.pm_out_log_path }}" *ngIf="jlist.pm2_env.pm_out_log_path">Out</option>
+                        </select>
+                    </span>
+                </div>
+            </h1>
+        </div>
+        <div style="max-height: 300px; overflow-y: scroll; height: 300px;">
+            <div *ngIf="logType; else noLog">
+                <div *ngFor="let line of logOutput">
+                    {{ line }}
+                </div>
+            </div>
+            <ng-template #noLog>
+                <span style="color:red; font: bold 25px georgia, sans-serif; position: fixed; right: 90px;">
+                    Please select a log to view from the drop down -->-->-->--^
+                </span>
+            </ng-template>
+        </div>
+    </div>
 </div>

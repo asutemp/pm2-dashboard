@@ -1,9 +1,14 @@
-<div *ngFor="let jlist of obsJlist | async">
-    <table style="width: 100%;" *ngIf="strcomp.strCompare(chosenProcess, jlist.name)">
-        <tr *ngFor="let axm of jlist.pm2_env.axm_monitor | keyvalue: keepOrder" style="border: 1px solid black; border-collapse: collapse;">
-            <td>{{ axm.key }}</td>
-            <td>{{ axm.value.value }}</td>
-            <td *ngIf="axm.value.unit">{{ axm.value.unit }}</td>
-        </tr>
-    </table>
+<div id="border">
+        <div class="sectionLabel">
+        <h1 style="padding-left:10px">Metrics</h1>
+    </div>
+    <div *ngFor="let jlist of obsJlist | async">
+        <table style="width: 100%;" *ngIf="strcomp.strCompare(chosenProcess, jlist.name)">
+            <tr *ngFor="let axm of jlist.pm2_env.axm_monitor | keyvalue: keepOrder" style="border: 1px solid black; border-collapse: collapse;">
+                <td>{{ axm.key }}</td>
+                <td>{{ axm.value.value }}</td>
+                <td *ngIf="axm.value.unit">{{ axm.value.unit }}</td>
+            </tr>
+        </table>
+    </div>
 </div>

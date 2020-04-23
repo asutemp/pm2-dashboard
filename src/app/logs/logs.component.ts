@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { LogReaderService } from './log-reader.service';
 import { BashCommandsService } from '../php/bash-commands.service';
 import { Processes } from '../processes/processNames';
-import { element } from 'protractor';
+import { StrCompService } from '../str-comp.service';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-logs',
@@ -11,27 +12,27 @@ import { element } from 'protractor';
   styleUrls: ['./logs.component.css']
 })
 export class LogsComponent implements OnInit {
-  @Input() logPath: string;
+  @Input() obsJlist: Observable<Processes[]>;
   @Input() chosenProcess: string;
   logIntermediary: Observable<string>;
   logOutput: string[];
   providers: [LogReaderService, BashCommandsService];
   splitPath: string[];
+  logType: [(NgModel)];
+  logPath: string;
 
-  constructor(private logreaderservice: LogReaderService, private bashcommandservice: BashCommandsService) { }
+  constructor(
+    private logreaderservice: LogReaderService,
+    private bashcommandservice: BashCommandsService,
+    public strcomp: StrCompService
+    ) { }
 
-  ngOnInit() {
-    
-	  this.getLog(this.getLogPath(this.logPath));
-   }
+  ngOnInit() { }
 
   getLogPath(chosenLog: string):string {
-    console.log(chosenLog);
-    this.splitPath = chosenLog.split("\\");
-    console.log("this.splitPath");
-    console.log(this.splitPath);
-    console.log(this.splitPath.values);
-    return this.splitPath[this.splitPath.length-2]
+    this.splitPath = chosenLog.split("/");
+    this.logPath = "./assets/"+this.splitPath[this.splitPath.length-1]
+    return this.logPath
    }
 
   async getLog(path: string){
@@ -39,9 +40,10 @@ export class LogsComponent implements OnInit {
     this.logIntermediary = await this.logreaderservice.getObsLog(path);
     this.logIntermediary
       .subscribe(data => this.logOutput = data.split('\n'));
-    console.log(this.logOutput);
   }
 
-
+  logIt(incoming: any){
+    console.log(incoming);
+  }
 
 }

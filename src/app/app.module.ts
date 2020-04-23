@@ -10,6 +10,7 @@ import { ProcessesComponent } from './processes/processes.component';
 import { LogsComponent } from './logs/logs.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { JlistComponent } from './jlist/jlist.component';
+import { AutoRefreshComponent } from './auto-refresh/auto-refresh.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { JlistComponent } from './jlist/jlist.component';
     MetadataComponent,
     ProcessesComponent,
     LogsComponent,
-    TopbarComponent
+    TopbarComponent,
+    AutoRefreshComponent
   ],
   imports: [
     BrowserModule,

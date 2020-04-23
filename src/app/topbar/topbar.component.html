@@ -9,4 +9,8 @@
          Refresh Rate (in seconds)
     </p>
 </div>
-  
+<app-auto-refresh
+  (TimerExpired)="bashcmd.execBsh()"
+  [ElapsTime]="refreshRate"  
+  [hidden]="'false'">
+</app-auto-refresh>
